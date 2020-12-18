@@ -1,6 +1,3 @@
-console.log('working')
+import "@babel/polyfill"
 
-
-const ok: (param:string) => void = (ok: string) => console.log(ok)
-
-ok('ok')
+import "#root/server/startServer"

@@ -2,9 +2,9 @@ import { DataTypes, Model } from "sequelize"
 
 import sequelize from './connection'
 
-export class Listing extends Model {}
+export class Customer extends Model {}
 
-Listing.init({
+Customer.init({
     first_name: {
         allowNull: false,
         type: DataTypes.STRING
@@ -57,6 +57,6 @@ Listing.init({
     }
 
 }, {
-    modelName: "listings",
+    modelName: "customers",
     sequelize
 })

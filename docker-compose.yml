@@ -4,12 +4,14 @@ services:
     build: "./listings-service"
     depends_on:
       - listings-service-db
+    environment:
+      - DB_URI=mysql://root:oowlish@listings-service-db/db?charset=UTF8
     volumes:
       - ./listings-service:/opt/app
 
   listings-service-db:
     environment:
-      - MYSQL_ROOT_PASSWORD=pasword
+      - MYSQL_ROOT_PASSWORD=oowlish
       - MYSQL_DATABASE=db
     image: mysql:5.7.20
     ports:

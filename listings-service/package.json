@@ -4,15 +4,19 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "watch": "babel-watch -L src/index.js"
+    "watch": "babel-watch -L src/index.js",
+    "db:migrate": "sequelize db:migrate"
   },
   "devDependencies": {
     "babel-watch": "^7.0.0"
   },
   "dependencies": {
-    "babel-plugin-module-resolver": "^4.1.0",
     "@babel/core": "^7.12.10",
     "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.12.11"
+    "@babel/preset-env": "^7.12.11",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0"
   }
 }

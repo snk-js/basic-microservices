@@ -1,8 +1,8 @@
 import { Listing } from "#root/db/models";
 
 const setupRoutes = app => {
-    app.get("/", async (req, res, next) => {
-        let listings = {}        
+    app.get("/listings", async (req, res, next) => {
+        let listings = {}       
 
         try {
             listings = await Listing.findAll()

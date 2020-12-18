@@ -1,0 +1,16 @@
+version: "3"
+services:
+  listings-service:
+    build: "./listings-service"
+    depends_on:
+      - listings-service-db
+    volumes:
+      - ./listings-service:/opt/app
+
+  listings-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=pasword
+      - MYSQL_DATABASE=db
+    image: mysql:5.7.20
+    ports:
+      - 0.0.0.0:7200:3306

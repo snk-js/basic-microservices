@@ -1,17 +1,26 @@
 version: "3"
 services:
-  listings-service:
-    build: "./listings-service"
+  api-gateway:
+    build: "./customers-service"
     depends_on:
-      - listings-service-db
+      - customers-service
+    ports:
+      - 7000:7000
+    volumes:
+      - ./api-gateway:/opt/app
+
+  customers-service:
+    build: "./customers-service"
+    depends_on:
+      - customers-service-db
     environment:
-      - DB_URI=mysql://root:password@listings-service-db/db?charset=UTF8
+      - DB_URI=mysql://root:password@customers-service-db/db?charset=UTF8
     ports:
       - 7100:7100
     volumes:
-      - ./listings-service:/opt/app
+      - ./customers-service:/opt/app
 
-  listings-service-db:
+  customers-service-db:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=db

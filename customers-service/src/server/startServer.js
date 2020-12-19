@@ -19,5 +19,5 @@ app.use(cors({
 setupRoutes(app)
 
 app.listen(PORT, "0.0.0.0", () => {
-    console.info(`Listing services listening on ${PORT}`)
+    console.info(`Customer services listening on ${PORT}`)
 })

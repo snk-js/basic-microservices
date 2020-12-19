@@ -1,6 +1,6 @@
 module.exports.up = (queryInterface, DataTypes) => {
 
-    return queryInterface.createTable("listings", {
+    return queryInterface.createTable("customers", {
         id: {
             allowNull: false,
             autoIncrement: true,

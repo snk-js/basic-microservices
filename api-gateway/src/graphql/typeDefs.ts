@@ -1,4 +1,4 @@
-import {gql } from "apollo-server"
+import { gql } from "apollo-server"
 
 const typeDefs = gql`
     type Customer {
@@ -15,7 +15,9 @@ const typeDefs = gql`
     }
 
     type Query {
-        list_customers
+        customers: [Customer!]!
     }
 
 `
+
+export default typeDefs

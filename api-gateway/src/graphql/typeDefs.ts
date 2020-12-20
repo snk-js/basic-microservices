@@ -14,6 +14,7 @@ const typeDefs = gql`
         long: String
     }
 
+
     type CountCustomerByCity {
         city: String!
         customers_total: Int!
@@ -23,7 +24,7 @@ const typeDefs = gql`
     type Query {
         customersByCity(city: String!): [Customer!]!
         customerById(id: String!): Customer!
-        totalCustomersByCity: [CountCustomerByCity!]!
+        totalCustomersByCity(limit: Int! offset: Int!): [CountCustomerByCity!]!
     }
 
 

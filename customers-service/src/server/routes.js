@@ -49,9 +49,14 @@ const setupRoutes = app => {
         }
     })
 
-    app.get("/customers/count/city", async ( req, res, next) => {
+    app.get("/customers/count/city/:options", async ( req, res, next) => {
         let citiesPopulation = []
         var memo = {}
+        const {limit, offset} = JSON.parse(req.params.options)
+
+        let l = limit || 20
+        let o = offset || 0
+
         try {
             // custom query
             citiesPopulation = await db.query(
@@ -66,11 +71,14 @@ const setupRoutes = app => {
             })
 
             // format into the test required object
-            const result = Array.from(Object.keys(memo), (v) => ({
+            const customersCountPerCity = Array.from(Object.keys(memo), (v) => ({
                 city: v,
                 customers_total: memo[v]
             }))
-            return res.json(result)
+
+            const resultAppliedOptions = customersCountPerCity.slice(o, o+l)
+
+            return res.json(resultAppliedOptions)
         } catch ( error ) {
             return res.json(error)
         }

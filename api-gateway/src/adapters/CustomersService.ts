@@ -12,8 +12,10 @@ export default class CustomersService {
         return body
     }
 
-    static async fetchCountCustomersByCity() {
-        const body = await got.get(`${CUSTOMERS_SERVICE_URI}/customers/count/city`).json()
+    static async fetchCountCustomersByCity(opt) {
+        const options = JSON.stringify(opt)
+
+        const body = await got.get(`${CUSTOMERS_SERVICE_URI}/customers/count/city/${options}`).json()
         return body
     }
 }

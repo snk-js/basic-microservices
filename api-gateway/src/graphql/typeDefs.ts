@@ -14,9 +14,18 @@ const typeDefs = gql`
         long: String
     }
 
-    type Query {
-        customers: [Customer!]!
+    type CountCustomerByCity {
+        city: String!
+        customers_total: Int!
     }
+
+
+    type Query {
+        customersByCity(city: String!): [Customer!]!
+        customerById(id: String!): Customer!
+        totalCustomersByCity: [CountCustomerByCity!]!
+    }
+
 
 `
 

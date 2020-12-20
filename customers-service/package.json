@@ -5,10 +5,13 @@
   "license": "MIT",
   "scripts": {
     "watch": "babel-watch -L src/index.js",
-    "db:migrate": "sequelize db:migrate"
+    "db:migrate": "sequelize db:migrate",
+    "test": "jest"
   },
   "devDependencies": {
-    "babel-watch": "^7.0.0"
+    "babel-watch": "^7.0.0",
+    "jest": "^26.6.3",
+    "supertest": "6.0.1"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",

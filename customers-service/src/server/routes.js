@@ -2,7 +2,7 @@ import { Customer } from "#root/db/models";
 import customers from '../../customers.json'
 const { QueryTypes } = require('sequelize');
 import db from '../db/connection'
-
+import {groupAndAgreggateByCity} from '../utils/transformers'
 
 const setupRoutes = app => {
     app.get("/mock", async ( req, res, next) => {        
@@ -51,7 +51,6 @@ const setupRoutes = app => {
 
     app.get("/customers/count/city/:options", async ( req, res, next) => {
         let citiesPopulation = []
-        var memo = {}
         const {limit, offset} = JSON.parse(req.params.options)
 
         let l = limit || 20
@@ -63,21 +62,8 @@ const setupRoutes = app => {
                 "SELECT city FROM customers GROUP BY city, id",
                 { type: QueryTypes.SELECT }
             )
-            // grouping, agregate and count by city
-            citiesPopulation.map((obj,ind) => {
-                const { city } = obj
-                if(typeof memo[city] === 'number') memo[city] += 1
-                if(!memo[city]) memo[city] = 1
-            })
-
-            // format into the test required object
-            const customersCountPerCity = Array.from(Object.keys(memo), (v) => ({
-                city: v,
-                customers_total: memo[v]
-            }))
-
-            const resultAppliedOptions = customersCountPerCity.slice(o, o+l)
-
+            
+            const resultAppliedOptions = groupAndAgreggateByCity(citiesPopulation).slice(o, o+l)
             return res.json(resultAppliedOptions)
         } catch ( error ) {
             return res.json(error)

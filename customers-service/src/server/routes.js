@@ -1,24 +1,40 @@
 import { Customer } from "#root/db/models";
-import customers from '../../customers.json'
 const { QueryTypes } = require('sequelize');
 import db from '../db/connection'
-import {groupAndAgreggateByCity} from '../utils/transformers'
+import { groupAndAgreggateByCity } from '../utils/transformers'
+
+import customers from '../../customers.json'
+import response_data from '../../formated_api_responses.json'
+
 
 const setupRoutes = app => {
     app.get("/mock", async ( req, res, next) => {        
-        let successful_count = 0
-        let errors = 0
-
-        const promises = customers.map(async (customer) => {
+        const customers_filled_with_lat_and_lng = response_data.map((response_entrie, ind) => ({
+            ...customers[ind],
+            lat: response_entrie.location.lat,
+            long: response_entrie.location.lng,
+        }))
+        
+        const promises = customers_filled_with_lat_and_lng.map(async (customer) => {
             return await Customer.create(customer)
-                .then(resolved => successful_count++)
-                .catch(err => errors++) 
         })
         try {
             await Promise.all(promises)
-            return res.json({success: `${successful_count+1} customers created with success!`})
+            return res.json({success:'success'})
         } catch (error) {
             return res.json({error})
+        }
+    })
+
+    app.get("/clear-database", async ( req, res, next) => {        
+        try {
+            Customer.destroy({
+                where:{},
+                truncate: true
+            })
+            return res.json({success:"success"})
+        } catch (err) {
+            return res.json({err})
         }
     })
 
@@ -62,7 +78,7 @@ const setupRoutes = app => {
                 "SELECT city FROM customers GROUP BY city, id",
                 { type: QueryTypes.SELECT }
             )
-            
+
             const resultAppliedOptions = groupAndAgreggateByCity(citiesPopulation).slice(o, o+l)
             return res.json(resultAppliedOptions)
         } catch ( error ) {

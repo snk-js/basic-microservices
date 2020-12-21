@@ -38,9 +38,11 @@ const setupRoutes = app => {
         }
     })
 
-    app.get("/customers/:city", async ( req, res, next) => {
-        const city = req.params.city
-        let customersByCity = {}
+    app.get("/customers", async ( req, res, next) => {
+        const city = req.query.city
+        let customersByCity = []
+        const { page, size } = req.query
+
         try {
             customersByCity = await Customer.findAll({
                 where: {
@@ -48,14 +50,15 @@ const setupRoutes = app => {
                 }
             })
 
-            return res.json(customersByCity)
+            const paginatedCustomersByCity = customersByCity.slice((page -1)*size, page*size)
+            return res.json(paginatedCustomersByCity)
         } catch ( error ) {
             return res.json(error)
         }
     })
 
-    app.get("/customer/:id", async ( req, res, next) => {
-        const id = req.params.id
+    app.get("/customer", async ( req, res, next) => {
+        const id = req.query.id
         let singleCustomer = {}
         try {
             singleCustomer = await Customer.findByPk(id)
@@ -65,13 +68,8 @@ const setupRoutes = app => {
         }
     })
 
-    app.get("/customers/count/city/:options", async ( req, res, next) => {
+    app.get("/customers/count/city", async ( req, res, next) => {
         let citiesPopulation = []
-        const {limit, offset} = JSON.parse(req.params.options)
-
-        let l = limit || 20
-        let o = offset || 0
-
         try {
             // custom query
             citiesPopulation = await db.query(
@@ -79,7 +77,7 @@ const setupRoutes = app => {
                 { type: QueryTypes.SELECT }
             )
 
-            const resultAppliedOptions = groupAndAgreggateByCity(citiesPopulation).slice(o, o+l)
+            const resultAppliedOptions = groupAndAgreggateByCity(citiesPopulation)
             return res.json(resultAppliedOptions)
         } catch ( error ) {
             return res.json(error)

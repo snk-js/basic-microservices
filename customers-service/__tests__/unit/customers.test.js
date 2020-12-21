@@ -25,12 +25,9 @@ describe('Test customers endpoint pure functions', () => {
             { city: "Bannister Acres, NC", customers_total: 10 }, 
             { city: "Bent Pine, VA", customers_total: 6 }
         ]
-
-
-        const result = groupAndAgreggateByCity(obj)
         
+        const result = groupAndAgreggateByCity(obj)
         expect(result).toStrictEqual(answer)
-
     }) 
 })
 

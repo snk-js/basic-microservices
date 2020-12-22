@@ -1,13 +1,13 @@
-import React from "react"
-import { render } from "react-dom"
+import React from 'react'
+import { render } from 'react-dom'
 import Root from '../src/components/Root'
 
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/react-hooks'
 import graphqlClient from './api/graphqlClient'
 
-import * as theme from "./theme"
+import * as theme from './theme'
 
 const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap')
@@ -29,9 +29,11 @@ const GlobalStyle = createGlobalStyle`
 `
 
 render(
-      <ApolloProvider client={graphqlClient}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-            <Root />
-        </ThemeProvider>
-      </ApolloProvider>, document.getElementById("root"))
+  <ApolloProvider client={graphqlClient}>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Root />
+    </ThemeProvider>
+  </ApolloProvider>,
+  document.getElementById('root')
+)

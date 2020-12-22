@@ -20,14 +20,8 @@ const typeDefs = gql`
         customers_total: Int!
     }
 
-    input CustomerByCityInput {
-        city: String! 
-        page: Int 
-        size: Int
-    }
-
     type Query {
-        customersByCity(input: CustomerByCityInput): [Customer!]!
+        customersByCity(city: String! page: Int size: Int): [Customer!]!
         customerById(id: String!): Customer!
         totalCustomersByCity: [CountCustomerByCity!]!
     }

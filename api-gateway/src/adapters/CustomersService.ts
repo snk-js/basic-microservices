@@ -3,7 +3,7 @@ import got from 'got'
 const CUSTOMERS_SERVICE_URI = "http://customers-service:7100"
 
 export default class CustomersService {
-    static async fetchCustomersByCity({input: {city, page, size}}) {
+    static async fetchCustomersByCity({city, page, size}) {
         let p = page || 1
         let s = size || 20
 

@@ -1,5 +1,4 @@
-import { Card, Avatar } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Cards from '../Card'
 import styled from 'styled-components'
 
@@ -8,7 +7,7 @@ import gql from 'graphql-tag'
 
 import { Spin } from 'antd'
 
-const query = gql`
+const LIST_CITIES = gql`
   {
     totalCustomersByCity {
       city
@@ -20,8 +19,8 @@ const query = gql`
 const Container = styled.div``
 
 const CitiesComponent = () => {
-  const { data, loading, refetch } = useQuery(query)
-  const [cities, setCities] = useState([
+  const { data, loading } = useQuery(LIST_CITIES)
+  const [cities] = useState([
     {
       city: 'Bannister Acres, NC',
       customers_total: 20

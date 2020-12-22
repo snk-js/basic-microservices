@@ -33,23 +33,21 @@ const Home = () => {
           </Card>
         </CardContainer>
       ) : (
-        <Layout>
-          <Router>
-            <div>
-              <Switch>
-                <Route path="/">
-                  <CitiesComponent />
-                </Route>
-                <Route path="/customers">
-                  <CustomersComponent />
-                </Route>
-                <Route path="/customer">
-                  <CustomerComponent />
-                </Route>
-              </Switch>
-            </div>
-          </Router>
-        </Layout>
+        <Router>
+          <Layout>
+            <Switch>
+              <Route exact path="/">
+                <CitiesComponent />
+              </Route>
+              <Route path="/customers">
+                <CustomersComponent />
+              </Route>
+              <Route path="/customer">
+                <CustomerComponent />
+              </Route>
+            </Switch>
+          </Layout>
+        </Router>
       )}
     </div>
   )

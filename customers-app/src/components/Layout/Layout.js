@@ -3,13 +3,20 @@ import { Layout, Menu, Breadcrumb } from 'antd'
 import { useAuth0 } from '@auth0/auth0-react'
 import './styles.css'
 import { Button, Space } from 'antd'
-
+import { useLocation } from 'react-router-dom'
 const { Header, Content, Footer } = Layout
 
 const LayoutComponent = ({ children }) => {
   const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0()
 
+  const { pathname } = useLocation()
   const [breadcumbState, setBreadcumbState] = useState(1)
+
+  useEffect(() => {
+    if (pathname === '/') setBreadcumbState(1)
+    if (pathname === '/customers') setBreadcumbState(2)
+    if (pathname === '/customer') setBreadcumbState(3)
+  }, [pathname])
 
   const handleLogin = () => {
     loginWithRedirect()

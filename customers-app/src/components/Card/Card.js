@@ -1,8 +1,8 @@
 import { Card, Avatar } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { EllipsisOutlined } from '@ant-design/icons'
-import { Spin } from 'antd'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const { Meta } = Card
 
@@ -24,18 +24,26 @@ const CardComponent = props => {
         const population = city.customers_total
 
         return (
-          <Card
-            className="card"
-            style={{ width: 300, margin: '20px' }}
-            cover={<img alt="example" src={`https://picsum.photos/id/${ind + 10}/200/100`} />}
-            actions={[<EllipsisOutlined key="ellipsis" />]}
+          <Link
+            to={{
+              pathname: '/customers',
+              search: `?city=${name}`
+            }}
           >
-            <Meta
-              avatar={<Avatar src={`https://picsum.photos/id/${ind + 50}/32/32`} />}
-              title={name}
-              description={`this city has ${population} customers`}
-            />
-          </Card>
+            <Card
+              key={ind * Math.random(1, 100)}
+              className="card"
+              style={{ width: 300, margin: '20px' }}
+              cover={<img alt="example" src={`https://picsum.photos/id/${ind + 10}/200/100`} />}
+              actions={[<EllipsisOutlined key="ellipsis" />]}
+            >
+              <Meta
+                avatar={<Avatar src={`https://picsum.photos/id/${ind + 50}/32/32`} />}
+                title={name}
+                description={`this city has ${population} customers`}
+              />
+            </Card>
+          </Link>
         )
       })}
     </Container>

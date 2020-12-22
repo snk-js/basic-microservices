@@ -1,17 +1,19 @@
-import bodyParser from 'body-parser'
+import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
-import setupRoutes from './routes';
+import setupRoutes from "./routes";
 
 const app = express();
 
 app.use(bodyParser.json());
 
-app.use(cors({
+app.use(
+  cors({
     origin: (origin, cb) => cb(null, true),
-    credentials: true
-}))
+    credentials: true,
+  })
+);
 
-setupRoutes(app)
+setupRoutes(app);
 
-export default app
+export default app;

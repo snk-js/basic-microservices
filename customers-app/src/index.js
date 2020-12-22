@@ -1,8 +1,10 @@
 import React from "react"
 import { render } from "react-dom"
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { ApolloProvider } from 'react-apollo';
 import Root from '../src/components/Root'
+
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
+
+import { ApolloProvider } from '@apollo/react-hooks';
 import graphqlClient from './api/graphqlClient'
 
 import * as theme from "./theme"
@@ -27,9 +29,9 @@ const GlobalStyle = createGlobalStyle`
 `
 
 render(
-    <ApolloProvider client={graphqlClient}>
+      <ApolloProvider client={graphqlClient}>
         <ThemeProvider theme={theme}>
-            <GlobalStyle />
+          <GlobalStyle />
             <Root />
         </ThemeProvider>
-    </ApolloProvider>, document.getElementById("root"))
+      </ApolloProvider>, document.getElementById("root"))

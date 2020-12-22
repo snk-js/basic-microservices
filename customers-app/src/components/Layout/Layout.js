@@ -3,11 +3,10 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import { useAuth0 } from "@auth0/auth0-react";
 import './styles.css'
 import { Button, Space } from 'antd'
-import Card from '../Card'
 
 const { Header, Content, Footer } = Layout;
 
-const LayoutComponent = () => {
+const LayoutComponent = ({children}) => {
     const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
 
     const [breadcumbState, setBreadcumbState] = useState(1)
@@ -50,11 +49,11 @@ const LayoutComponent = () => {
         { breadcumbState > 2 ? <Breadcrumb.Item>List Customers by city</Breadcrumb.Item> :null  }
       </Breadcrumb>
       <div className="site-layout-content">
-        <Card/>
+          {children}
       </div>
     </Content>
     <Footer style={{ textAlign: 'center' }}>Created in (JS) "Juliano Silva"</Footer>
-  </Layout>);
+  </Layout>)
 }
  
 export default LayoutComponent;

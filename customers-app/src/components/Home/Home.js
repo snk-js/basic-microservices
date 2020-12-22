@@ -2,6 +2,7 @@ import { Spin, Card, Button } from 'antd';
 import {useAuth0} from "@auth0/auth0-react";
 import Layout from '../Layout'
 import styled from "styled-components"
+import CitiesComponent from '../Cities'
 
 
 const CardContainer = styled.div`
@@ -13,7 +14,7 @@ const CardContainer = styled.div`
     align-items: center
 `
 
-const Login = () => {
+const Home = () => {
     const { loginWithRedirect,  isAuthenticated } = useAuth0();
 
     const handleLogin = ( ) => {
@@ -21,15 +22,17 @@ const Login = () => {
     }
 
     return ( 
-        <>
+        <div>
             { !isAuthenticated ? 
                 <CardContainer>
                     <Card size="large" title="Olá, visitante 😊" extra={<Spin/>} style={{ width: 300 }}>
                         <Button onClick={handleLogin}>Login</Button>
                     </Card>
                 </CardContainer>
-            : <Layout /> };
-        </>)
+            : <Layout>
+                <CitiesComponent />
+            </Layout> }
+        </div>)
 }
  
-export default Login;
+export default Home;

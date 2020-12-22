@@ -1,47 +1,55 @@
 
 import { Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react'
+import {  EllipsisOutlined } from '@ant-design/icons';
+import { Spin } from 'antd'
 import styled from "styled-components"
 
 const { Meta } = Card;
 
 const Container = styled.div`
+    max-width: 100%;
+    flex-wrap: wrap;
     display: flex;
-    flex-shrink: 0;
-    width: 300px;
-    transform-style: preserve-3d;
     border-radius: 30px;
+    justify-content: center;
+    align-items: center;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+    
 `
 
-
-const CardComponent = () => {
+const CardComponent = (props) => {
 
 
     return (
-        <Container className="container">
-            <Card
+        <Container>
+            {props.cities.map((city, ind) => {
+                const name = city.city
+                const population = city.customers_total
+
+                return  (<Card
                 className="card"
-                style={{ width: 300 }}
+                style={{ width: 300, margin: '20px' }}
                 cover={
                 <img
                     alt="example"
-                    src="https://picsum.photos/200/100.jpg"
+                    src={`https://picsum.photos/id/${ind+10}/200/100`}
                 />
                 }
                 actions={[
-                <SettingOutlined key="setting" />,
-                <EditOutlined key="edit" />,
-                <EllipsisOutlined key="ellipsis" />,
+                    <EllipsisOutlined key="ellipsis" />,
                 ]}
             >
                 <Meta
-                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                title="Card title"
-                description="This is the description"
+                    avatar={<Avatar src={`https://picsum.photos/id/${ind+50}/32/32`} />}
+                    title={name}
+                    description={`this city has ${population} customers`}
                 />
-            </Card>
-        </Container>)
+            </Card>)
+            })}
+        </Container>
+          
+        )
 }
  
 export default CardComponent;

@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from "styled-components"
-import {Auth0Provider, useAuth0} from "@auth0/auth0-react";
+import {Auth0Provider } from "@auth0/auth0-react";
 import 'antd/dist/antd.css'; 
-import Login from '../Login'
+import Home from '../Home'
 
 const Container = styled.div`
     display:flex;
@@ -31,7 +31,7 @@ const Root = () => {
                     clientId="hoLK3QR7CxbxxTNY2vRRDF5zE1f5DQhH"
                     redirectUri={window.location.origin}
                 >
-                    <Login />
+                    <Home />
                 </Auth0Provider>
                 </Content>
             </Container>

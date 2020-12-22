@@ -24,8 +24,8 @@ const Customers = () => {
   let { search } = useLocation()
 
   const city = search.split('=').reverse()[0].split('%20').join(' ')
-  const [page, setPage] = useState(1)
-  const [size, setSize] = useState(20)
+  const [page] = useState(1)
+  const [size] = useState(50)
 
   const model = {
     id: '',

@@ -4,6 +4,8 @@ services:
     build: "./customers-service"
     depends_on:
       - customers-service
+    environment:
+      - CUSTOMERS_SERVICE_URI=http://customers-service:7100
     ports:
       - 7000:7000
     volumes:

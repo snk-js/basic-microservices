@@ -29,6 +29,8 @@ const CitiesComponent = () => {
 
   if (loading) return <Spin />
 
+  if(!data && !data?.totalCustomersByCity) return <div> Databse must be filled!</div>
+
   return (
     <Container className="container">
       <Cards cities={data.totalCustomersByCity || cities} />

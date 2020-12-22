@@ -2,12 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd'
 import { useAuth0 } from '@auth0/auth0-react'
 import './styles.css'
-import { Button, Space } from 'antd'
+import { Button, Space, message } from 'antd'
 import { useLocation } from 'react-router-dom'
 const { Header, Content, Footer } = Layout
 
 const LayoutComponent = ({ children }) => {
   const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0()
+
+  const success = () => {
+    message.success('database filled with success!')
+  }
+
+  const error = () => {
+    message.error('something goes wrong :(')
+  }
 
   const { pathname } = useLocation()
   const [breadcumbState, setBreadcumbState] = useState(1)
@@ -20,6 +28,39 @@ const LayoutComponent = ({ children }) => {
 
   const handleLogin = () => {
     loginWithRedirect()
+  }
+
+  const refreshPage = () => {
+    window.location.reload()
+  }
+
+  const handleMockDB = () => {
+    const mock = async () => {
+      try {
+        await fetch('http://localhost:7100/mock')
+        success()
+        setTimeout(refreshPage, 300)
+      } catch (err) {
+        error()
+        setTimeout(refreshPage, 300)
+      }
+    }
+    mock()
+  }
+
+  const handleClearDatabase = () => {
+    const clear = async () => {
+      try {
+        await fetch('http://localhost:7100/clear-database')
+        success()
+        setTimeout(refreshPage, 300)
+      } catch (err) {
+        error()
+        setTimeout(refreshPage, 300)
+      }
+    }
+
+    clear()
   }
 
   const handleLogout = () => {
@@ -67,7 +108,15 @@ const LayoutComponent = ({ children }) => {
         </Breadcrumb>
         <div className="site-layout-content">{children}</div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>Created in (JS) "Juliano Silva"</Footer>
+      <Footer style={{ textAlign: 'center' }}>
+        Created in (JS) "Juliano Silva"
+        <Button style={{ marginLeft: '30px' }} onClick={handleMockDB} type="primary">
+          Mock database with 1000 entries
+        </Button>
+        <Button style={{ marginLeft: '30px' }} onClick={handleClearDatabase} type="primary">
+          clear database
+        </Button>
+      </Footer>
     </Layout>
   )
 }

@@ -11,7 +11,7 @@ const columns = [
     title: 'Name',
     dataIndex: 'first_name',
     key: 'first_name',
-    render: text => <a>{text}</a>
+    render: text => <a href="/">{text}</a>
   },
   {
     title: 'Last Name',
@@ -61,7 +61,7 @@ const columns = [
             search: `?lat=${record.lat}&long=${record.long}`
           }}
         >
-          <a>View {record.name} Location</a>
+          <a href="/">View {record.name} Location</a>
         </Link>
       </Space>
     )
@@ -69,7 +69,9 @@ const columns = [
 ]
 
 const CustomersTable = ({ data: { customersByCity } }) => {
-  return <Table columns={columns} dataSource={customersByCity} />
+  if(!customersByCity) return <div>Database must be filled!</div>
+
+  return <Table columns={columns} dataSource={customersByCity } />
 }
 
 export default CustomersTable

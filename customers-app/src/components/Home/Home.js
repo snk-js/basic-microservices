@@ -6,7 +6,7 @@ import CitiesComponent from '../Cities'
 import CustomersComponent from '../Customers'
 import CustomerComponent from '../Customer'
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 const CardContainer = styled.div`
   display: flex;

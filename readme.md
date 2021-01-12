@@ -1,15 +1,16 @@
 
 
-# Considerations
+# :page_with_curl: Basic microservices Template
 
-Finally, after some days of work, I was planning to do full deployment using Terraform, aws (with ec2 instances) and codedeploy.
-But, when It come it was already late, and, also, I was struggling with mounting that perfectly in one day, and then I aborted to do it. 
-I think the project made in 6 days aprreciate 90% of what it requires, except CI/CD. Well, It was very funny, but, sincerely, I must search and study more about DevOps operations, and particularly speaking, I would love to learn more about but I'm still a little junior on that.
+<p align="center">
+  <img alt="" src="preview.gif">
+</p>
 
-# Basic microservices
-This project uses 3 open ports in a docker system to listen to 
-* mysql database server 
-* graphql api-gateway server
+#### This project uses 3 services in serverside
+* mysql database server  - port 7200
+* graphql api-gateway server - port 7000
+* a headless Content delivery using Express - port 7100
+#### and 1 clientside service.
 * react app server
 
 ## This project uses
